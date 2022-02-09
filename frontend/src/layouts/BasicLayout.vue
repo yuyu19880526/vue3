@@ -2,7 +2,6 @@
   <pro-layout
     :locale="locale"
     v-bind="layoutConf"
-    :breadcrumb="{ routes: breadcrumb }"
   >
     <template #menuHeaderRender>
       <a>
@@ -10,7 +9,9 @@
       </a>
     </template>
     <template #breadcrumbRender="{ route, params, routes }">
-      <span v-if="routes.indexOf(route) === routes.length - 1">{{ route.breadcrumbName }}</span>
+      <span v-if="routes.indexOf(route) === routes.length - 1">
+        {{ route.breadcrumbName }}
+      </span>
       <router-link v-else :to="{ path: route.path, params }">
         {{ route.breadcrumbName }}
       </router-link>
@@ -28,6 +29,7 @@ const locale = (i18n: string) => i18n;
 const router = useRouter();
 
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
+
 
 const layoutConf = reactive({
   navTheme: 'dark',
