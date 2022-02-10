@@ -8,12 +8,27 @@
     :breadcrumb="{ routes: breadcrumb }"
     iconfont-url="//at.alicdn.com/t/font_2804900_nzigh7z84gc.js"
   >
-    <!-- <template #menuHeaderRender>
+    <template #menuHeaderRender>
       <a>
-        <img src="/antdv-pro-logo.svg" />
-        <h1>Pro Layout</h1>
+        <reddit-outlined style="font-size:26px;color:#fff" />
+        <h1>DEMO</h1>
       </a>
-    </template> -->
+    </template>
+    <!-- custom collapsed button -->
+    <template #collapsedButtonRender="collapsed">
+      <HeartOutlined v-if="collapsed" />
+      <SmileOutlined v-else />
+    </template>
+    <!-- custom right-content -->
+    <template #rightContentRender>
+      <div style="margin-right: 12px">
+        <a-avatar shape="square" size="small">
+          <template #icon>
+            <UserOutlined />
+          </template>
+        </a-avatar>
+      </div>
+    </template>
     <!-- custom breadcrumb itemRender  -->
     <template #breadcrumbRender="{ route, params, routes }">
       <span v-if="routes.indexOf(route) === routes.length - 1">{{ route.breadcrumbName }}</span>
@@ -21,10 +36,11 @@
         {{ route.breadcrumbName }}
       </router-link>
     </template>
-
     <!-- content begin -->
     <router-view v-slot="{ Component }">
-      <component :is="Component" />
+      <WaterMark>
+        <component :is="Component" />
+      </WaterMark>
     </router-view>
   </pro-layout>
 </template>
@@ -49,7 +65,6 @@ export default defineComponent({
     [Input.Search.name]: Input.Search,
     [Switch.name]: Switch,
     [Select.name]: Select,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     [Select.Option.displayName!]: Select.Option,
     [Space.name]: Space,
     [Badge.name]: Badge,
@@ -58,7 +73,6 @@ export default defineComponent({
   },
   setup() {
     const loading = ref(false);
-    const watermarkContent = ref('Pro Layout');
     const router = useRouter();
     const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
 
@@ -72,8 +86,8 @@ export default defineComponent({
     const state = reactive({
       menuData,
       splitMenus: true,
-      title: '后台管理系统',
-      logo: 'https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg',
+      // title: 'ProLayout',
+      // logo: 'https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg',
       navTheme: 'dark',
       layout: 'side',
       fixSiderbar: true,
@@ -81,7 +95,6 @@ export default defineComponent({
     });
     const breadcrumb = computed(() =>
       router.currentRoute.value.matched.concat().map(item => {
-        console.log(item)
         return {
           path: item.path,
           breadcrumbName: item.meta.title || '',
@@ -109,25 +122,15 @@ export default defineComponent({
       }, 2000);
     }
 
-    onMounted(() => {
-      setTimeout(() => {
-        watermarkContent.value = 'New Mark';
-      }, 2000);
-    });
-
     return {
       i18n,
-      watermarkContent,
       baseState,
       state,
       loading,
       breadcrumb,
 
       handlePageLoadingClick,
-      handleCollapsed,
-      handleSearch: () => {
-        message.info('search..');
-      },
+      handleCollapsed
     };
   },
 });
