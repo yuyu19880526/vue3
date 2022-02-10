@@ -14,11 +14,6 @@
         <h1>DEMO</h1>
       </a>
     </template>
-    <!-- custom collapsed button -->
-    <template #collapsedButtonRender="collapsed">
-      <HeartOutlined v-if="collapsed" />
-      <SmileOutlined v-else />
-    </template>
     <!-- custom right-content -->
     <template #rightContentRender>
       <div style="margin-right: 12px">
@@ -29,18 +24,9 @@
         </a-avatar>
       </div>
     </template>
-    <!-- custom breadcrumb itemRender  -->
-    <template #breadcrumbRender="{ route, params, routes }">
-      <span v-if="routes.indexOf(route) === routes.length - 1">{{ route.breadcrumbName }}</span>
-      <router-link v-else :to="{ path: route.path, params }">
-        {{ route.breadcrumbName }}
-      </router-link>
-    </template>
     <!-- content begin -->
     <router-view v-slot="{ Component }">
-      <WaterMark>
-        <component :is="Component" />
-      </WaterMark>
+      <component :is="Component" />
     </router-view>
   </pro-layout>
 </template>
@@ -49,7 +35,7 @@
 import { computed, defineComponent, reactive, ref, watchEffect} from 'vue';
 import { useRouter } from 'vue-router';
 import { Button, Input, Switch, Select, Avatar, Space, Badge, Menu } from 'ant-design-vue';
-import { getMenuData, clearMenuItem, WaterMark, FooterToolbar } from '@ant-design-vue/pro-layout';
+import { getMenuData, clearMenuItem } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 
 const i18n = (t: string) => t;
@@ -57,8 +43,6 @@ const i18n = (t: string) => t;
 export default defineComponent({
   name: 'BasicLayout',
   components: {
-    FooterToolbar,
-    WaterMark,
 
     [Button.name]: Button,
     [Input.name]: Input,
