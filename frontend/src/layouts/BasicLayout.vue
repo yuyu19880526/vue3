@@ -10,7 +10,7 @@
   >
     <template #menuHeaderRender>
       <a>
-        <reddit-outlined style="font-size:26px;color:#fff" />
+        <crown-outlined style="font-size:26px;color:#fff" />
         <h1>DEMO</h1>
       </a>
     </template>
