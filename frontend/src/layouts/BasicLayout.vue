@@ -46,9 +46,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref, watchEffect, onMounted } from 'vue';
+import { computed, defineComponent, reactive, ref, watchEffect} from 'vue';
 import { useRouter } from 'vue-router';
-import { message, Button, Input, Switch, Select, Avatar, Space, Badge, Menu } from 'ant-design-vue';
+import { Button, Input, Switch, Select, Avatar, Space, Badge, Menu } from 'ant-design-vue';
 import { getMenuData, clearMenuItem, WaterMark, FooterToolbar } from '@ant-design-vue/pro-layout';
 import type { RouteContextProps } from '@ant-design-vue/pro-layout';
 
@@ -65,6 +65,7 @@ export default defineComponent({
     [Input.Search.name]: Input.Search,
     [Switch.name]: Switch,
     [Select.name]: Select,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     [Select.Option.displayName!]: Select.Option,
     [Space.name]: Space,
     [Badge.name]: Badge,

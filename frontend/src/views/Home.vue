@@ -22,7 +22,6 @@ export default defineComponent({
     };
     return {
       handleClick,
-
       text,
     };
   },
