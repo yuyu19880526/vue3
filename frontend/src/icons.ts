@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as Icons from '@ant-design/icons-vue/es';
 import type { App } from 'vue';
 import type { IconType } from '@ant-design/icons-vue/es/components/Icon';
@@ -14,7 +15,7 @@ export const filterIcons = [
 ];
 
 export default (app: App) => {
-  const allIcon: AllIcon = Icons as any;
+  const allIcon: AllIcon = Icons as never;
   Object.keys(Icons)
     .filter(k => !filterIcons.includes(k))
     .forEach(k => {
